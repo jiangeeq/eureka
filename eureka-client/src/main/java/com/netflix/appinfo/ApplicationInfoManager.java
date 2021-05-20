@@ -227,7 +227,7 @@ public class ApplicationInfoManager {
                         newSpotInstanceAction));
                 updateInstanceInfo(null , null );
             }
-        }        
+        }
     }
 
     private void updateInstanceInfo(String newAddress, String newIp) {
@@ -246,17 +246,21 @@ public class ApplicationInfoManager {
     }
 
     public void refreshLeaseInfoIfRequired() {
+        // 到期时间的租赁信息。
         LeaseInfo leaseInfo = instanceInfo.getLeaseInfo();
         if (leaseInfo == null) {
             return;
         }
+        // eureka服务器自启动后等待的时间
         int currentLeaseDuration = config.getLeaseExpirationDurationInSeconds();
+        // eureka客户机需要发送的频率
         int currentLeaseRenewal = config.getLeaseRenewalIntervalInSeconds();
         if (leaseInfo.getDurationInSecs() != currentLeaseDuration || leaseInfo.getRenewalIntervalInSecs() != currentLeaseRenewal) {
             LeaseInfo newLeaseInfo = LeaseInfo.Builder.newBuilder()
                     .setRenewalIntervalInSecs(currentLeaseRenewal)
                     .setDurationInSecs(currentLeaseDuration)
                     .build();
+            // 更新instanceInfo
             instanceInfo.setLeaseInfo(newLeaseInfo);
             instanceInfo.setIsDirty();
         }

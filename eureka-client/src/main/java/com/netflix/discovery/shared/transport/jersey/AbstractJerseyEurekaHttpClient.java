@@ -49,7 +49,9 @@ public abstract class AbstractJerseyEurekaHttpClient implements EurekaHttpClient
         ClientResponse response = null;
         try {
             Builder resourceBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
+            // 包装请求头
             addExtraHeaders(resourceBuilder);
+            // 发送请求执行注册
             response = resourceBuilder
                     .header("Accept-Encoding", "gzip")
                     .type(MediaType.APPLICATION_JSON_TYPE)
@@ -74,6 +76,7 @@ public abstract class AbstractJerseyEurekaHttpClient implements EurekaHttpClient
         try {
             Builder resourceBuilder = jerseyClient.resource(serviceUrl).path(urlPath).getRequestBuilder();
             addExtraHeaders(resourceBuilder);
+            // 通过 Jersey 向 Server 提交一个 DELETE 请求
             response = resourceBuilder.delete(ClientResponse.class);
             return anEurekaHttpResponse(response.getStatus()).headers(headersOf(response)).build();
         } finally {
@@ -186,6 +189,7 @@ public abstract class AbstractJerseyEurekaHttpClient implements EurekaHttpClient
         ClientResponse response = null;
         String regionsParamValue = null;
         try {
+            // 通过配置的erureke server url获取resource
             WebResource webResource = jerseyClient.resource(serviceUrl).path(urlPath);
             if (regions != null && regions.length > 0) {
                 regionsParamValue = StringUtil.join(regions);
@@ -193,10 +197,12 @@ public abstract class AbstractJerseyEurekaHttpClient implements EurekaHttpClient
             }
             Builder requestBuilder = webResource.getRequestBuilder();
             addExtraHeaders(requestBuilder);
+            // 执行get请求
             response = requestBuilder.accept(MediaType.APPLICATION_JSON_TYPE).get(ClientResponse.class);
 
             Applications applications = null;
             if (response.getStatus() == Status.OK.getStatusCode() && response.hasEntity()) {
+                // 结果转换为application注册对象
                 applications = response.getEntity(Applications.class);
             }
             return anEurekaHttpResponse(response.getStatus(), Applications.class)

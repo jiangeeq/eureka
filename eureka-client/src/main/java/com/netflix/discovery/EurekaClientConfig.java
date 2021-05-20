@@ -362,7 +362,6 @@ public interface EurekaClientConfig {
      * <em>The changes are effective at runtime at the next registry fetch cycle as specified by
      * {@link #getRegistryFetchIntervalSeconds()}</em>
      * </p>
-     *
      * @return true to enable fetching delta information for registry, false to
      *         get the full registry.
      */

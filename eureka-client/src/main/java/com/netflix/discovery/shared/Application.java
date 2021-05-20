@@ -48,13 +48,13 @@ import com.thoughtworks.xstream.annotations.XStreamOmitField;
  * application.
  *
  * @author Karthik Ranganathan
- *
+ * 这个类就是客户端注册表，即客户端从服务端下载的服务注册表
  */
 @Serializer("com.netflix.discovery.converters.EntityBodyConverter")
 @XStreamAlias("application")
 @JsonRootName("application")
 public class Application {
-    
+
     private static Random shuffleRandom = new Random();
 
     @Override
@@ -69,6 +69,9 @@ public class Application {
     @XStreamOmitField
     private volatile boolean isDirty = false;
 
+    /*这个map的key为微服务名称， value为能够提供该服务的Application， 而一个Application
+    中又维护着一个 InstanceInfo 列表，而一个 IntanceInfo 就代表一个提供者主机
+    */
     @XStreamImplicit
     private final Set<InstanceInfo> instances;
 
@@ -106,6 +109,7 @@ public class Application {
     public void addInstance(InstanceInfo i) {
         instancesMap.put(i.getId(), i);
         synchronized (instances) {
+            // 因为linkedHashSet
             instances.remove(i);
             instances.add(i);
             isDirty = true;

@@ -424,12 +424,12 @@ public class InstanceInfo {
             result.appName = intern.apply(appName.toUpperCase(Locale.ROOT));
             return this;
         }
-        
+
         public Builder setAppNameForDeser(String appName) {
             result.appName = appName;
             return this;
         }
-        
+
 
         public Builder setAppGroupName(String appGroupName) {
             if (appGroupName != null) {
@@ -1001,6 +1001,7 @@ public class InstanceInfo {
 
     /**
      * Returns the lease information regarding when it expires.
+     * 返回有关到期时间的租赁信息。
      *
      * @return the lease information of this instance.
      */
@@ -1240,6 +1241,7 @@ public class InstanceInfo {
     /**
      * Sets the dirty flag so that the instance information can be carried to
      * the discovery server on the next heartbeat.
+     * 设置dirty标志，以便可以携带实例信息到下一个心跳上的发现服务器。
      */
     public synchronized void setIsDirty() {
         isInstanceInfoDirty = true;

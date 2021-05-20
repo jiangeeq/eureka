@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
+ * 阈值水平指标
  * A collection of gauges that represent different threshold levels over which measurement is mapped to.
  * Value 1 denotes a lowest threshold level that is reached.
  * For example eureka client registry data staleness defines thresholds 30s, 60s, 120s, 240s, 480s. Delay of 90s
