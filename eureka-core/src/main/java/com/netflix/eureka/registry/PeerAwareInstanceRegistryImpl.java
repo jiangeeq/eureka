@@ -398,7 +398,7 @@ public class PeerAwareInstanceRegistryImpl extends AbstractInstanceRegistry impl
      *
      * @param info
      *            the {@link InstanceInfo} to be registered and replicated.
-     * @param isReplication
+     * @param isReplication 如果这是来自其他复制节点的复制事件，则为True
      *            true if this is a replication event from other replica nodes,
      *            false otherwise.
      */

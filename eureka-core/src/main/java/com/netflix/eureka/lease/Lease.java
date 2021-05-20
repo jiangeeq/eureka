@@ -78,6 +78,7 @@ public class Lease<T> {
      * subsequent calls will be ignored.
      */
     public void serviceUp() {
+        // 这将只影响第一次调用，后续调用将被忽略。
         if (serviceUpTimestamp == 0) {
             serviceUpTimestamp = System.currentTimeMillis();
         }
@@ -150,6 +151,7 @@ public class Lease<T> {
 
     /**
      * Returns the holder of the lease.
+     * 返回租约的持有者。
      */
     public T getHolder() {
         return holder;

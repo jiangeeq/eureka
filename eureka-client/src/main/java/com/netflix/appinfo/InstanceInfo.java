@@ -1070,6 +1070,7 @@ public class InstanceInfo {
 
     /**
      * Set the update time for this instance when the status was update.
+     * 为这个实例设置状态为update时的更新时间。
      */
     public void setLastUpdatedTimestamp() {
         this.lastUpdatedTimestamp = System.currentTimeMillis();
@@ -1342,10 +1343,10 @@ public class InstanceInfo {
     }
 
     public enum ActionType {
-        ADDED, // Added in the discovery server
-        MODIFIED, // Changed in the discovery server
+        ADDED, // 已添加到发现服务器中 Added in the discovery server
+        MODIFIED, // 在发现服务器中更改 Changed in the discovery server
         DELETED
-        // Deleted from the discovery server
+        // 从发现服务器上删除 Deleted from the discovery server
     }
 
     /**

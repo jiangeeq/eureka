@@ -145,7 +145,7 @@ public class ApplicationResource {
     public Response addInstance(InstanceInfo info,
                                 @HeaderParam(PeerEurekaNode.HEADER_REPLICATION) String isReplication) {
         logger.debug("Registering instance {} (replication={})", info.getId(), isReplication);
-        // validate that the instanceinfo contains all the necessary required fields
+        // 验证instanceinfo是否包含所有必需的字段 validate that the instanceinfo contains all the necessary required fields
         if (isBlank(info.getId())) {
             return Response.status(400).entity("Missing instanceId").build();
         } else if (isBlank(info.getHostName())) {
@@ -162,7 +162,7 @@ public class ApplicationResource {
             return Response.status(400).entity("Missing dataCenterInfo Name").build();
         }
 
-        // handle cases where clients may be registering with bad DataCenterInfo with missing data
+        // 处理客户端可能注册带有丢失数据的坏DataCenterInfo的情况 handle cases where clients may be registering with bad DataCenterInfo with missing data
         DataCenterInfo dataCenterInfo = info.getDataCenterInfo();
         if (dataCenterInfo instanceof UniqueIdentifier) {
             String dataCenterInfoId = ((UniqueIdentifier) dataCenterInfo).getId();

@@ -80,7 +80,7 @@ public class DefaultEurekaClientConfig implements EurekaClientConfig {
         this.namespace = namespace.endsWith(".")
                 ? namespace
                 : namespace + ".";
-
+        // java的配置管理类库，主要用于多配置存储的动态获取
         this.configInstance = Archaius1Utils.initConfig(CommonConstants.CONFIG_FILE_NAME);
         this.transportConfig = new DefaultEurekaTransportConfig(namespace, configInstance);
     }

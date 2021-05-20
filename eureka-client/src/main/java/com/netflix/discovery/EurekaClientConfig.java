@@ -523,9 +523,10 @@ public interface EurekaClientConfig {
     String getEscapeCharReplacement();
 
     /**
-     * If set to true, local status updates via
+     * If set to true, local status updates via 如果设置为true，本地状态更新通过
      * {@link com.netflix.appinfo.ApplicationInfoManager#setInstanceStatus(com.netflix.appinfo.InstanceInfo.InstanceStatus)}
      * will trigger on-demand (but rate limited) register/updates to remote eureka servers
+     * 将触发按需(但速率有限)注册/更新到远程eureka服务器
      *
      * @return true or false for whether local status updates should be updated to remote servers on-demand
      */
